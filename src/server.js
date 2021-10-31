@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import tournamentsRouter from "./services/tournaments/index.js";
+import playersRouter from "./services/players/index.js";
 
 const server = express();
 const port = 3001;
@@ -11,6 +12,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use("/tournaments", tournamentsRouter);
+server.use("/players", playersRouter);
 
 // console.table(listEndpoints(server));
 

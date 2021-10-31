@@ -14,6 +14,13 @@ tournamentsRoute.get("/", async (req, res, next) => {
 
 tournamentsRoute.get("/:id", async (req, res, next) => {
   try {
+    const id = req.params.id;
+    const tournament = await touranmentsSchema.findById(id);
+    if (tournament) {
+      res.send(tournament);
+    } else {
+      console.log("error");
+    }
   } catch (error) {
     next(error);
   }
@@ -38,6 +45,19 @@ tournamentsRoute.delete("/:id", async (req, res, next) => {
 
 tournamentsRoute.put("/:id", async (req, res, next) => {
   try {
+    const id = req.params.id;
+    const editedTournament = await touranmentsSchema.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+    if (editedTournament) {
+      res.send(editedTournament);
+    } else {
+      console.log("error");
+    }
   } catch (error) {
     next(error);
   }
